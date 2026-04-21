@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mengot Arquitectura — Proyectos</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0d0d0d;
+      --surface: #141414;
+      --card:    #1b1b1b;
+      --border:  #252525;
+      --border2: #303030;
+      --muted:   #444;
+      --mid:     #777;
+      --light:   #aaa;
+      --white:   #ebebeb;
+      --green:   #6fcf97;
+      --orange:  #f0a050;
+      --font:    'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--light);
+      font-family: var(--font);
+      font-size: 13px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: #0a0a0a;
+      border-bottom: 1px solid var(--border);
+      padding: 32px 48px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-brand { display: flex; align-items: center; gap: 20px; }
+    .logo-mark {
+      width: 64px; height: 64px;
+      flex-shrink: 0;
+      object-fit: contain;
+      filter: invert(1);
+      mix-blend-mode: screen;
+      opacity: 0.92;
+    }
+    .brand-name {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .portal-title {
+      font-size: 20px; font-weight: 200;
+      letter-spacing: 0.04em; color: var(--white);
+    }
+    .header-meta { text-align: right; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 48px 48px; }
+    .section-label {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+
+    /* PROYECTO CARDS */
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .proyecto-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .proyecto-card:hover { border-color: var(--border2); background: #1f1f1f; }
+    .proyecto-card.activo { border-top: 2px solid var(--green); }
+    .proyecto-card.pausado { border-top: 2px solid var(--muted); }
+    .proyecto-card.entregado { border-top: 2px solid #4a7c59; }
+
+    .proy-estado {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .proy-estado.activo  { color: var(--green); }
+    .proy-estado.pausado { color: var(--muted); }
+    .proy-estado.entregado { color: #4a7c59; }
+
+    .proy-nombre {
+      font-size: 17px; font-weight: 200;
+      letter-spacing: 0.04em; color: var(--white);
+      margin-bottom: 4px;
+    }
+    .proy-ubicacion {
+      font-size: 11px; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .proy-meta {
+      display: flex; gap: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px; margin-top: 14px;
+    }
+    .proy-meta-item { }
+    .proy-meta-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .proy-meta-value { font-size: 13px; color: var(--light); font-variant-numeric: tabular-nums; }
+    .proy-arrow {
+      position: absolute; top: 24px; right: 20px;
+      font-size: 14px; color: var(--muted);
+      transition: color 0.15s, transform 0.15s;
+    }
+    .proyecto-card:hover .proy-arrow { color: var(--light); transform: translateX(3px); }
+
+    /* PRÓXIMOS */
+    .proximos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+    .proximo-card {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      padding: 20px 22px;
+    }
+    .proximo-nombre { font-size: 13px; color: var(--mid); font-weight: 300; margin-bottom: 4px; }
+    .proximo-sub { font-size: 10px; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      text-align: center;
+      font-size: 10px; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <img class="logo-mark" src="https://sebastianmengot.github.io/proyectos/assets/logo.jpg" alt="SM Arquitectura">
+    <div>
+      <div class="brand-name">Mengot Arquitectura</div>
+      <div class="portal-title">Portal de Proyectos</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    Acceso restringido — clientes y equipo<br>
+    <span id="fecha-hoy"></span>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-label">Proyectos activos</div>
+  <div class="proyectos-grid">
+
+    <a class="proyecto-card activo" href="./pm-162/">
+      <div class="proy-arrow">→</div>
+      <div class="proy-estado activo">⬤ En obra</div>
+      <div class="proy-nombre">PM Lote 162</div>
+      <div class="proy-ubicacion">Pueblo Mío, José Ignacio</div>
+      <div class="proy-meta">
+        <div class="proy-meta-item">
+          <div class="proy-meta-label">Inversión</div>
+          <div class="proy-meta-value">USD 1.205.134</div>
+        </div>
+        <div class="proy-meta-item">
+          <div class="proy-meta-label">Avance</div>
+          <div class="proy-meta-value">47,6%</div>
+        </div>
+        <div class="proy-meta-item">
+          <div class="proy-meta-label">Entrega est.</div>
+          <div class="proy-meta-value">Oct 2026</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Agregar nuevos proyectos acá -->
+
+  </div>
+
+  <div class="section-label" style="margin-top:16px">Próximos proyectos</div>
+  <div class="proximos-grid">
+    <div class="proximo-card">
+      <div class="proximo-nombre">Nuevo proyecto</div>
+      <div class="proximo-sub">En evaluación</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Mengot Arquitectura &nbsp;·&nbsp; sebastianmengot@gmail.com &nbsp;·&nbsp; Montevideo, Uruguay
+</footer>
+
+<script>
+  document.getElementById('fecha-hoy').textContent =
+    new Date().toLocaleDateString('es-UY', { day:'2-digit', month:'long', year:'numeric' });
+</script>
+
+</body>
+</html>
